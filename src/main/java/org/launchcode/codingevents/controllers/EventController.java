@@ -29,20 +29,21 @@ public class EventController {
         model.addAttribute("title", "Create Event");
         return "events/create";
     }
-/* //values passed through constructor
+    //values passed through constructor
     @PostMapping("create")
     public String processCreateEventForm(@RequestParam String eventName,
                                          @RequestParam String eventDescription) {
         EventData.add(new Event(eventName, eventDescription));
         return "redirect:";
-    }*/
+    }
 
+    /*
     //Model binding
     @PostMapping("create")
     public String processCreateEventForm(@ModelAttribute Event newEvent) {
         EventData.add(newEvent);
         return "redirect:";
-    }
+    }*/
 
     @GetMapping("delete")
     public String displayDeleteEventForm(Model model) {
@@ -60,6 +61,24 @@ public class EventController {
             }
         }
 
+        return "redirect:";
+    }
+
+    @GetMapping("edit/{eventId}")
+    public String displayEditForm(Model model, @PathVariable int eventId) {
+        Event eventToEdit = EventData.getById(eventId);
+        model.addAttribute("eventToEdit", eventToEdit);
+        String title = "Edit Event " + eventToEdit.getName() + " (id=" + eventToEdit.getId() + ")";
+        model.addAttribute("title", title );
+        return "events/edit";
+
+    }
+
+    @PostMapping("edit")
+    public String processEditForm(int eventId, String name, String description) {
+        Event eventToEdit = EventData.getById(eventId);
+        eventToEdit.setName(name);
+        eventToEdit.setDescription(description);
         return "redirect:";
     }
 
