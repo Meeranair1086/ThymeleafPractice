@@ -8,7 +8,7 @@
 <form method="post">
     <div class="form-group">
         <label>Name
-            <input th:field="${event.name}" class="form-control">
+                <input th:field="${event.name}" class="form-control">
         </label>
         <p class="error" th:errors="${event.name}"></p>
     </div>
@@ -41,6 +41,16 @@
             <input th:field="${event.attendeesRegistration}" class="form-control">
         </label>
         <p class="error" th:errors="${event.attendeesRegistration}"></p>
+    </div>
+    <div class="form-group">
+        <label>Type
+            <select th:field="${event.type}">
+                <option th:each="type : ${types}"
+                        th:value="${type}"
+                        th:text="${type.displayName}">
+                </option>
+            </select>
+        </label>
     </div>
     <div class="form-group">
         <input type="submit" value="Create" class="btn btn-success">

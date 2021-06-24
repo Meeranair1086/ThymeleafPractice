@@ -28,17 +28,23 @@ public class Event {
     @AssertTrue
     private boolean attendeesRegistration;
 
-    public Event(String name, String description, String contactEmail,String location,int numberOfAttendees) {
+    private EventType type;
+
+    public Event(String name, String description, String contactEmail,String location,int numberOfAttendees,EventType type) {
+        this();
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
         this.location = location;
         this.numberOfAttendees=numberOfAttendees;
+        this.type=type;
+
+    }
+
+    public Event(){
         this.id = nextId;
         nextId++;
     }
-
-    public Event(){}
 
     public String getName() {
         return name;
@@ -90,6 +96,14 @@ public class Event {
 
     public void setAttendeesRegistration(boolean attendeesRegistration) {
         this.attendeesRegistration = attendeesRegistration;
+    }
+
+    public EventType getType() {
+        return type;
+    }
+
+    public void setType(EventType type) {
+        this.type = type;
     }
 
     @Override
