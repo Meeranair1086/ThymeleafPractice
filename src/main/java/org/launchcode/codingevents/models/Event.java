@@ -1,14 +1,15 @@
 package org.launchcode.codingevents.models;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.*;
-import java.util.Objects;
-
 
 @Entity
 public class Event extends AbstractEntity {
+
+    @NotBlank(message = "Name is required")
+    @Size(min=3,max=50,message = "Name must be between 3 and 50 characters.")
+    private String name;
 
     @Size(max=500,message = "Description too long.")
     private String description;
@@ -26,19 +27,28 @@ public class Event extends AbstractEntity {
     @AssertTrue
     private boolean attendeesRegistration;
 
-    private EventType type;
+    @ManyToOne
+    @NotNull(message = "Category is required!")
+    private EventCategory eventCategory;
 
-    public Event(String name, String description, String contactEmail,String location,int numberOfAttendees,EventType type) {
+    public Event(String name, String description, String contactEmail,String location,int numberOfAttendees,EventCategory eventCategory) {
+        this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
         this.location = location;
         this.numberOfAttendees=numberOfAttendees;
-        this.type=type;
+        this.eventCategory=eventCategory;
 
     }
 
     public Event(){}
 
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getDescription() {
         return description;
@@ -82,12 +92,17 @@ public class Event extends AbstractEntity {
         this.attendeesRegistration = attendeesRegistration;
     }
 
-    public EventType getType() {
-        return type;
+    public EventCategory getEventCategory() {
+        return eventCategory;
     }
 
-    public void setType(EventType type) {
-        this.type = type;
+    public void setEventCategory(EventCategory eventCategory) {
+        this.eventCategory = eventCategory;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 
 

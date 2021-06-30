@@ -14,7 +14,7 @@
         <th>Contact Email</th>
         <th>Number Of Attendees</th>
         <th>Attendees Registration</th>
-        <th>Type</th>
+        <th>Category</th>
     </tr>
     </thead>
     <tr th:each="event : ${events}">
@@ -24,7 +24,7 @@
         <td th:text="${event.contactEmail}"></td>
         <td th:text="${event.numberOfAttendees}"></td>
         <td th:text="${event.attendeesRegistration}"></td>
-        <td th:text="${event.type}"></td>
+        <td th:text="${event.eventCategory.name}"></td>
     </tr>
 </table>
 
